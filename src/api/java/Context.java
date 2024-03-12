@@ -985,6 +985,19 @@ public class Context implements AutoCloseable {
     }
 
     /**
+     * Create the divisible predicate
+     * @param n divisor
+     * @param t dividend
+     */
+    public BoolExpr mkDivides(int n, Expr<IntSort> t)
+    {
+        checkContextMatch(t);
+
+        numeral = mkNumeral(n, IntSort);
+        Native.mkDivides(nCtx(), numeral.getNativeObject(), t.getNativeObject());
+    }
+
+    /**
      * Coerce an integer to a real.
      * Remarks:  There is also a converse operation
      * exposed. It follows the semantics prescribed by the SMT-LIB standard.
